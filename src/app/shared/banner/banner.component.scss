@@ -1,0 +1,30 @@
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 400px;
+  }
+  .banner-content {
+    max-width: 50%;
+  }
+  .banner-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+  }
+  .title-banner{
+    font-size: 50px;
+    font-family: Poppins;
+  }
+.desc-banner{
+    font-size: 17px;
+}
+.btn-banner{
+    font-size: 17px;
+    background-color: #8fb3e2;
+    border-radius: 20px;
+    transition: background 0.5s;
+}
+.btn-banner:hover{
+    background: #f9f9fa;
+}

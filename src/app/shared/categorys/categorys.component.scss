@@ -1,0 +1,20 @@
+.categories {
+    
+    margin: 70px 0px;
+  }
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+  }
+  .category-grid img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+  }
+.category-grid img:hover {
+  transform: scale(1.05);
+}
