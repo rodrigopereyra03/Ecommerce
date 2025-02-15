@@ -1,1 +1,33 @@
-<p>products works!</p>
+<br><br><br><br>
+<div class="products-container">
+
+    <!-- Filtros -->
+    <div class="filters">
+      <label>Ordenar por:</label>
+      <select (change)="changeSort($event.target)">
+        <option value="newest" [selected]="sortOption === 'newest'">Más nuevo</option>
+        <option value="oldest" [selected]="sortOption === 'oldest'">Más viejo</option>
+        <option value="priceAsc" [selected]="sortOption === 'priceAsc'">Precio: Menor a Mayor</option>
+        <option value="priceDesc" [selected]="sortOption === 'priceDesc'">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+   
+   <!-- Lista de Productos -->
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <a [routerLink]="['/product', product.id]">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.price | currency }}</p>
+        <p>{{ product.description }}</p>
+      </a>
+    </div>
+  </div>
+  
+    <!-- Paginación -->
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+    </div>
+</div>

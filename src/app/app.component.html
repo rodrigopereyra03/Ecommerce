@@ -1,15 +1,14 @@
 
-
 <div>
-  <div class="menu">
-  <app-header></app-header>
-  <app-banner></app-banner>
-  </div>
-  <app-categorys></app-categorys>
+  <header class="menu">
+    <app-header></app-header>
+    <app-banner *ngIf="!isProductsPage"></app-banner>
+  </header>
+  
+  <app-categorys *ngIf="!isProductsPage"></app-categorys>
   <br>
-  <app-footer></app-footer>
-
   <main>
     <router-outlet></router-outlet>
   </main>
+  <app-footer></app-footer>
 </div>

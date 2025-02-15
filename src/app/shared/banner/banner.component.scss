@@ -11,6 +11,8 @@
     width: 100%;
     max-width: 500px;
     border-radius: 10px;
+    margin-top: 50px;
+    transform: scale(1.2)
   }
   .title-banner{
     font-size: 50px;
@@ -21,10 +23,62 @@
 }
 .btn-banner{
     font-size: 17px;
-    background-color: #8fb3e2;
+    background-color: #c7c7f5;
     border-radius: 20px;
     transition: background 0.5s;
 }
 .btn-banner:hover{
     background: #f9f9fa;
+}
+
+/* 🎯 Responsive */
+@media (max-width: 1024px) {
+  .banner {
+    padding: 40px 100px; // Reduce el padding
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column; // Apila los elementos en móviles
+    text-align: center;
+    padding: 30px 50px;
+  }
+
+  .banner-content {
+    padding-top: 50px;
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .title-banner {
+    font-size: 40px;
+  }
+
+  .desc-banner {
+    font-size: 15px;
+  }
+
+  .banner-image {
+    display: none; // ❌ Oculta la imagen en pantallas pequeñas
+  }
+}
+
+@media (max-width: 480px) {
+  .banner {
+    padding: 20px;
+  }
+
+  .title-banner {
+    font-size: 35px;
+  }
+
+  .desc-banner {
+    font-size: 14px;
+  }
+
+  .btn-banner {
+    font-size: 15px;
+    padding: 8px 15px;
+  }
 }

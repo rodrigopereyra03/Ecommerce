@@ -1,5 +1,12 @@
 <header class="header">
-    <div class="logo">LOGO</div>
+  <div class="logo-container">
+    <div class="logo">
+      <a routerLink="/home">
+        <img src="assets/img/logo.png" alt="Logo">
+      </a>
+    </div>
+  </div>
+  
     <nav class="nav">
       <a routerLink="/home">Home</a>
       <a routerLink="/about">About</a>
@@ -13,5 +20,5 @@
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
       </mat-menu>
     </nav>
-  </header>
+</header>
 
