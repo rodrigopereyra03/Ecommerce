@@ -1,0 +1,121 @@
+.header {
+  display: flex;
+  justify-content: center; // Centra el contenido horizontalmente
+  align-items: center; // Centra verticalmente
+  padding: 15px 50px;
+  font-size: 18px;
+  font-family: Poppins;
+  width: 100%;
+  background-color: radial-gradient(#fff,#8fb3e2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px; /* Agrega más espacio sin achicar el logo */
+}
+
+.logo img {
+  height: 60px; /* Mantiene el alto en 50px */
+  width: auto; /* Evita distorsiones */
+  transform: scale(3.0); /* Aumenta el tamaño sin cambiar height */
+  margin-right: 500px;
+}
+
+
+
+/* Estilo de navegación */
+.nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: nowrap; /* Evita que se desplace demasiado */
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 8px 12px;
+    white-space: nowrap; /* Evita que los textos se corten */
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+}
+/* Botón del icono de usuario */
+.nav button[mat-icon-button] {
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* Menú hamburguesa para móviles */
+.menu-toggle {
+  display: none; /* Se oculta en pantallas grandes */
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .header {
+    padding: 10px 10px 0px;
+  }
+
+  .logo {
+    flex-grow: 1; // Permite que el logo ocupe espacio sin empujar demasiado
+    padding-right: 0; // Eliminamos el padding derecho que rompe el diseño
+  }
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 20px;
+  }
+
+  .nav-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .logo {
+    justify-content: center;
+    width: 100%;
+    margin-left: 110px;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: white;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+  }
+
+  .nav a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
