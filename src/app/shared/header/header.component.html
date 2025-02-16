@@ -1,7 +1,7 @@
 <header class="header">
   <div class="logo-container">
     <div class="logo">
-      <a routerLink="/home">
+      <a routerLink="/">
         <img src="assets/img/logo.png" alt="Logo">
       </a>
     </div>
@@ -16,8 +16,16 @@
         <mat-icon>person</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="login()">Iniciar sesión</button>
-        <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+        <ng-container *ngIf="isAuthenticated; else notLoggedIn">
+          <button mat-menu-item routerLink="/my-account">Mis Datos</button>
+          <button mat-menu-item routerLink="/my-orders">Mis Pedidos</button>
+          <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+        </ng-container>
+        
+        <ng-template #notLoggedIn>
+          <button mat-menu-item routerLink="/login">Iniciar sesión</button>
+          <button mat-menu-item routerLink="/register">Registrarse</button>
+        </ng-template>
       </mat-menu>
     </nav>
 </header>

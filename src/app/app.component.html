@@ -1,11 +1,10 @@
-
 <div>
   <header class="menu">
     <app-header></app-header>
-    <app-banner *ngIf="!isProductsPage"></app-banner>
+    <app-banner *ngIf="!isProductsPage && !isLoginPage && !isRegisterPage"></app-banner>
   </header>
   
-  <app-categorys *ngIf="!isProductsPage"></app-categorys>
+  <app-categorys *ngIf="!isProductsPage && !isLoginPage && !isRegisterPage"></app-categorys>
   <br>
   <main>
     <router-outlet></router-outlet>

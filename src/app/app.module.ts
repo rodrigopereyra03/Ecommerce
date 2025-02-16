@@ -12,6 +12,14 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { CategorysComponent } from './shared/categorys/categorys.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProductsComponent } from './features/products/products.component';
+import { LoginComponent } from './shared/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa FormsModule
+// Angular Material
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { RegisterComponent } from './shared/register/register.component';
 
 
 @NgModule({
@@ -21,7 +29,9 @@ import { ProductsComponent } from './features/products/products.component';
     BannerComponent,
     CategorysComponent,
     FooterComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,14 @@ import { ProductsComponent } from './features/products/products.component';
     BrowserAnimationsModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

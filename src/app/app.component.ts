@@ -10,11 +10,15 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   title = 'proyect';
   isProductsPage = false;
+  isLoginPage = false;
+  isRegisterPage = false
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isProductsPage = event.url.startsWith('/products');
+        this.isProductsPage = event.url === '/products';
+        this.isLoginPage = event.url === '/login';
+        this.isRegisterPage = event.url === '/register'
       }
     });
   }
