@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,19 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isAuthenticated = false;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-  }
-  login() {
-    console.log('Iniciar sesión');
-    // Aquí puedes redirigir a la página de login
+    this.isAuthenticated = this.authService.isAuthenticated();
+    
+    // Suscribirse a cambios en autenticación
+    this.authService.authStatus.subscribe(status => {
+      this.isAuthenticated = status;
+    });
   }
 
-  logout() {
-    console.log('Cerrar sesión');
-    // Aquí puedes hacer lógica para cerrar sesión
+  logout(): void {
+    this.authService.logout();
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
   }
   
 }
