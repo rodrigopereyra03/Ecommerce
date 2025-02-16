@@ -1,10 +1,9 @@
 <section class="categories">
-    <div class="category-grid">
-      <a [routerLink]="'/products'" [queryParams]="{ category: 1 }"><img src="assets/img/category1.jpg" alt="Categoría 1"></a>
-      <a [routerLink]="'/products'" [queryParams]="{ category: 2 }"><img src="assets/img/category2.jpg" alt="Categoría 2"></a>
-      <a [routerLink]="'/products'" [queryParams]="{ category: 3 }"><img src="assets/img/category3.jpg" alt="Categoría 3"></a>
-      <a [routerLink]="'/products'" [queryParams]="{ category: 4 }"><img src="assets/img/category4.jpg" alt="Categoría 4"></a>
-      <a [routerLink]="'/products'" [queryParams]="{ category: 5 }"><img src="assets/img/category5.jpg" alt="Categoría 5"></a>
-      <a [routerLink]="'/products'" [queryParams]="{ category: 6 }"><img src="assets/img/category7.png" alt="Categoría 6"></a>
-    </div>
-  </section>
+  <div class="category-grid">
+    <a *ngFor="let category of categories" 
+       [routerLink]="'/products'" 
+       [queryParams]="{ category: category.id }">
+      <img [src]="category.mainImage" [alt]="category.name">
+    </a>
+  </div>
+</section>
