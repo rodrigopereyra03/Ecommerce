@@ -20,9 +20,10 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<{ jwt: string }>(`${this.backendUrl}/login`, { email, password }).pipe(
+    return this.http.post<{ jwt: string, userRole: string }>(`${this.backendUrl}/login`, { email, password }).pipe(
       tap(response => {
         localStorage.setItem('token', response.jwt);
+        localStorage.setItem('userRole', response.userRole);
         this.authStatusSource.next(true); // Notificar que el usuario ha iniciado sesión
       })
     );
@@ -30,11 +31,16 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
     this.authStatusSource.next(false); // Notificar que el usuario ha cerrado sesión
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  isAdmin(): boolean {
+    return localStorage.getItem('userRole') === 'ADMIN';
   }
 
   private hasToken(): boolean {

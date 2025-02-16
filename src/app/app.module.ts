@@ -20,6 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { RegisterComponent } from './shared/register/register.component';
+import { AdminCategoryComponent } from './features/admin/category/admin-category/admin-category.component';
+import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { RegisterComponent } from './shared/register/register.component';
     ProductsComponent,
     LoginComponent,
     RegisterComponent,
+    AdminCategoryComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

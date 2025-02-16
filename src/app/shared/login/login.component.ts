@@ -16,7 +16,7 @@ export class LoginComponent  {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
   onSubmit(): void {
@@ -27,7 +27,14 @@ export class LoginComponent  {
 
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => {
+        console.log('Rol del usuario:', localStorage.getItem('userRole'));
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/admin']); // Redirigir al panel de admin si es admin
+        } else {
+          this.router.navigate(['/products']); // Redirigir a productos si es usuario normal
+        }
+      },
       error: (err) => (this.errorMessage = err.message || 'El correo o la contraseña son incorrectos.')
     });
   }

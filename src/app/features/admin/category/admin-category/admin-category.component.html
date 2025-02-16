@@ -1,0 +1,15 @@
+<h2>Administrar Categorías</h2>
+
+<div>
+  <input [(ngModel)]="newCategory.name" placeholder="Nombre de la categoría">
+  <input [(ngModel)]="newCategory.mainImage" placeholder="URL de imagen">
+  <button (click)="createCategory()">Crear</button>
+</div>
+
+<ul>
+  <li *ngFor="let category of categories">
+    <img [src]="category.mainImage" width="50">
+    {{ category.name }}
+    <button (click)="deleteCategory(category.id)">Eliminar</button>
+  </li>
+</ul>

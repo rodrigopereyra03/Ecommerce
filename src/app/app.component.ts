@@ -12,6 +12,7 @@ export class AppComponent {
   isProductsPage = false;
   isLoginPage = false;
   isRegisterPage = false
+  isAdminPage = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -19,6 +20,7 @@ export class AppComponent {
         this.isProductsPage = event.url === '/products';
         this.isLoginPage = event.url === '/login';
         this.isRegisterPage = event.url === '/register'
+        this.isAdminPage = event.url.startsWith('/admin');
       }
     });
   }
