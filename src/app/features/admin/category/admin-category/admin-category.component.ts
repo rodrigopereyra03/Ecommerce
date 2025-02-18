@@ -18,20 +18,45 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.categoryService.getCategories().subscribe(data => {
-      this.categories = data;
+    this.categoryService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar categorías:', err);
+      }
     });
   }
 
   createCategory(): void {
-    this.categoryService.createCategory(this.newCategory).subscribe(() => {
-      this.loadCategories();
-      this.newCategory = { id: 0, name: '', mainImage: '' };
+    const categoryToCreate = { ...this.newCategory };
+    delete categoryToCreate.id; // Eliminar id antes de crear una nueva categoría
+    
+    this.categoryService.createCategory(categoryToCreate).subscribe({
+      next: () => {
+        this.loadCategories(); // Recargar categorías después de crear una nueva
+        this.newCategory = { id: 0, name: '', mainImage: '' }; // Limpiar el formulario
+      },
+      error: (err) => {
+        alert('Hubo un error al crear la categoría.');
+        console.error(err);
+      }
     });
   }
 
-  deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id).subscribe(() => this.loadCategories());
+  deleteCategory(id?: number): void {
+    if (id != null) {  // Verificar que id no sea null o undefined
+      this.categoryService.deleteCategory(id).subscribe({
+        next: () => {
+          this.loadCategories(); // Recargar categorías después de eliminar
+        },
+        error: (err) => {
+          console.error('Error al eliminar categoría:', err);
+        }
+      });
+    } else {
+      console.error('No se pudo eliminar la categoría: id no válido.');
+    }
   }
 
 }
