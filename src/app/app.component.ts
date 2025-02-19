@@ -17,9 +17,9 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isProductsPage = event.url === '/products';
+        this.isProductsPage = event.url.startsWith('/products'); // ✅ Detecta todas las variantes de /products/*
         this.isLoginPage = event.url === '/login';
-        this.isRegisterPage = event.url === '/register'
+        this.isRegisterPage = event.url === '/register';
         this.isAdminPage = event.url.startsWith('/admin');
       }
     });

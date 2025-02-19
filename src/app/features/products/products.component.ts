@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -10,57 +10,56 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductsComponent implements OnInit {
 
-  category: string | null = null;
+  categoryId: number | null = null;
+  allProducts: any[] = [];  // 🔹 Almacena todos los productos sin paginar
   products: any[] = [];
-  totalPages: number = 1;
+  apiUrl = 'http://localhost:8080/api/product';
+  itemsPerPage: number = 10;  // 🔹 Cantidad de productos por página
   currentPage: number = 1;
-  sortOption: string = 'newest';
- 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  totalPages: number = 1;
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.currentPage = +params['page'] || 1;  // Obtener la página actual desde los query params
-      this.sortOption = params['sort'] || 'newest';  // Obtener el tipo de orden desde los query params
-      this.category = params['category'];  // Obtener la categoría, si está presente
-      console.log('Filtrar productos por categoría:', this.category);
-
-      this.loadProducts();  // Cargar los productos con los parámetros actualizados
-    });
+    this.route.paramMap.subscribe(params => {
+      this.categoryId = params.get('categoryId') ? +params.get('categoryId')! : null;
+      this.loadProducts(); 
+    });    
   }
 
-/*  loadProducts() {
-    const url = `http://localhost:8080/api/products?page=${this.currentPage}&size=10&sort=${this.sortOption}`;
-    this.http.get<{ products: any[], totalPages: number }>(url).subscribe(response => {
-      this.products = response.products;
-      this.totalPages = response.totalPages;
-    });
-  }*/
-
   loadProducts() {
-    // Simulando una respuesta del backend
-    this.products = [
-      { name: 'Producto 1', price: 100, imageUrl: 'assets/img/category1.jpg' },
-      { name: 'Producto 2', price: 200, imageUrl: 'assets/img/category2.jpg' },
-      { name: 'Producto 3', price: 300, imageUrl: 'assets/img/category3.jpg' },
-      { name: 'Producto 3', price: 300, imageUrl: 'assets/img/category4.jpg' },
-      { name: 'Producto 3', price: 300, imageUrl: 'assets/img/category5.jpg' }
-      
-    ];
-    this.totalPages = 1; // Para simular una sola página
+    let params = new HttpParams();
+    
+    if (this.categoryId) {
+      params = params.set('categoryId', this.categoryId.toString());  // ✅ Filtrar por ID de categoría
+    }
+
+    this.http.get<any[]>(this.apiUrl, { params }).subscribe(response => {
+      console.log('Productos recibidos:', response);
+      this.allProducts = response;  // ✅ Asigna directamente el array recibido
+      this.calculatePagination();
+    });
   }
 
   changePage(page: number) {
     if (page > 0 && page <= this.totalPages) {
-      this.router.navigate([], { queryParams: { page, sort: this.sortOption }, queryParamsHandling: 'merge' });
+      this.currentPage = page;  // 🔹 Actualiza la página actual
+      this.router.navigate([], { 
+        queryParams: { page, categoryId: this.categoryId }, 
+        queryParamsHandling: 'merge' 
+      });
+      this.updateDisplayedProducts();  // 🔹 Refresca los productos mostrados
     }
   }
 
-  changeSort(selectElement: EventTarget | null) {
-    const target = selectElement as HTMLSelectElement; // Hacemos un casting para tratarlo como un select
-    if (target && target.value) {
-      this.router.navigate([], { queryParams: { page: 1, sort: target.value }, queryParamsHandling: 'merge' });
-    }
+  calculatePagination() {
+    this.totalPages = Math.ceil(this.allProducts.length / this.itemsPerPage); // 🔹 Calcula el total de páginas
+    this.updateDisplayedProducts();
+  }
+  updateDisplayedProducts() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.products = this.allProducts.slice(startIndex, endIndex); // 🔹 Filtra los productos de la página actual
   }
 
 }
