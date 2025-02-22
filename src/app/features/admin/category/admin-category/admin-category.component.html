@@ -4,7 +4,7 @@
   <div class="admin-content">
     <div class="category-form">
       <input [(ngModel)]="newCategory.name" placeholder="Nombre de la categoría">
-      <input [(ngModel)]="newCategory.mainImage" placeholder="URL de imagen">
+      <input type="file" (change)="onFileSelected($event)" placeholder="Selecciona una imagen">
       <button (click)="createCategory()" class="btn-primary">Crear</button>
     </div>
 

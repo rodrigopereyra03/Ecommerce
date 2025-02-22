@@ -16,7 +16,7 @@
   <div class="product-grid">
     <div class="product-card" *ngFor="let product of products">
       <a [routerLink]="['/product', product.id]">
-        <img [src]="product.imageUrl" [alt]="product.name">
+        <img [src]="product.mainImage" [alt]="product.name">
         <h3>{{ product.name }}</h3>
         <p>{{ product.price | currency }}</p>
         <p>{{ product.description }}</p>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category, CategoryService } from 'src/app/core/services/category.service';
+import { ImageService } from 'src/app/core/services/image.service';
 
 @Component({
   selector: 'app-admin-category',
@@ -8,13 +9,33 @@ import { Category, CategoryService } from 'src/app/core/services/category.servic
 })
 export class AdminCategoryComponent implements OnInit {
 
+  selectedImage: File | null = null;
   categories: Category[] = [];
   newCategory: Category = { id: 0, name: '', mainImage: '' };
   
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService,private imageService: ImageService) {}
 
   ngOnInit(): void {
     this.loadCategories();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+      this.uploadImage(file);
+    }
+  }
+
+  uploadImage(file: File) {
+    this.imageService.uploadImageToBackend(file).subscribe({
+      next: (response: string) => {
+        this.newCategory.mainImage = response;  // Asumir que la URL es la respuesta
+      },
+      error: (error) => {
+        console.error('Error al subir la imagen', error);
+      }
+    });
   }
 
   loadCategories(): void {
