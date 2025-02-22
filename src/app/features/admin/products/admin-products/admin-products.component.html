@@ -1,0 +1,53 @@
+<div class="admin-panel">
+    <h2>Administrar Productos</h2>
+  
+    <div class="admin-content">
+      <div class="product-form">
+        <input [(ngModel)]="newProduct.name" placeholder="Nombre del producto">
+        <input [(ngModel)]="newProduct.description" placeholder="Descripción">
+        <input type="number" [(ngModel)]="newProduct.quantity" placeholder="Cantidad">
+        <input type="number" [(ngModel)]="newProduct.price" placeholder="Precio">
+        <label for="mainImage">Imagen Principal:</label>
+            <input id="mainImage" type="file" (change)="onFileSelected($event)" accept="image/*">
+
+            <!-- Input para imágenes adicionales -->
+            <label for="extraImages">Imágenes adicionales:</label>
+            <input id="extraImages" type="file" (change)="onMultipleFilesSelected($event)" multiple accept="image/*">
+
+        <select [(ngModel)]="newProduct.categoryId">
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+  
+        <button (click)="createProduct()" class="btn-primary">Crear Producto</button>
+      </div>
+  
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td><img [src]="product.mainImage" class="product-img"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>{{ getCategoryName(product.categoryId) }}</td>
+            <td>
+              <button (click)="deleteProduct(product.id)" class="btn-delete">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

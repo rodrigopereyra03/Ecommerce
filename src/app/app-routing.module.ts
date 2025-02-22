@@ -5,11 +5,18 @@ import { AppComponent } from './app.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
+import { AdminCategoryComponent } from './features/admin/category/admin-category/admin-category.component';
+import { AuthGuard } from './shared/auth/auth.guard';
+import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
+import { AdminProductsComponent } from './features/admin/products/admin-products/admin-products.component';
 
 const routes: Routes = [
-  {path: 'products', component: ProductsComponent},
+  { path: 'products/:categoryId', component: ProductsComponent },
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
+  { path: 'admin/categories', component: AdminCategoryComponent, canActivate: [AuthGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

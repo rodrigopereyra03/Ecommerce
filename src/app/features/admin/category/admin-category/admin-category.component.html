@@ -1,0 +1,86 @@
+<div class="admin-panel">
+  <h2>Administrar Categorías</h2>
+
+  <div class="admin-content">
+    <div class="category-form">
+      <input [(ngModel)]="newCategory.name" placeholder="Nombre de la categoría">
+      <input type="file" (change)="onFileSelected($event)" placeholder="Selecciona una imagen">
+      <button (click)="createCategory()" class="btn-primary">Crear</button>
+    </div>
+
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td><img [src]="category.mainImage" class="category-img"></td>
+          <td>{{ category.name }}</td>
+          <td>
+            <button (click)="deleteCategory(category.id)" class="btn-delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+    <!-- <div class="admin-panel">
+        <h2>Administrar Categorías</h2>
+
+        <div class="create-category-form">
+            <h3>Crear Nueva Categoría</h3>
+            <form (ngSubmit)="createCategory()">
+            <label for="name">Nombre:</label>
+            <input
+                type="text"
+                id="name"
+                [(ngModel)]="newCategory.name"
+                name="name"
+                required
+            />
+            <label for="mainImage">Imagen Principal:</label>
+            <input
+                type="text"
+                id="mainImage"
+                [(ngModel)]="newCategory.mainImage"
+                name="mainImage"
+                required
+            />
+            <button type="submit" class="btn-primary">Crear Categoría</button>
+            </form>
+        </div>
+
+  
+        <div class="category-list">
+            <h3>Lista de Categorías</h3>
+            <table class="category-table">
+            <thead>
+                <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories">
+                <td><img [src]="category.mainImage" class="category-img" alt="Imagen categoría" /></td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <button (click)="deleteCategory(category.id)" class="btn-delete">Eliminar</button>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div> -->
+
+
+
+

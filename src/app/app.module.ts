@@ -20,7 +20,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { RegisterComponent } from './shared/register/register.component';
-
+import { AdminCategoryComponent } from './features/admin/category/admin-category/admin-category.component';
+import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth/auth.interceptor';
+import { AdminProductsComponent } from './features/admin/products/admin-products/admin-products.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,9 @@ import { RegisterComponent } from './shared/register/register.component';
     ProductsComponent,
     LoginComponent,
     RegisterComponent,
+    AdminCategoryComponent,
+    AdminDashboardComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +55,7 @@ import { RegisterComponent } from './shared/register/register.component';
     MatCardModule,
     ReactiveFormsModule 
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
