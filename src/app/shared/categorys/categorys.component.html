@@ -1,6 +1,6 @@
 <section class="categories">
   <div class="category-grid">
-    <a *ngFor="let category of categories" [routerLink]="['/products', category.id]">
+    <a *ngFor="let category of categories" [routerLink]="['/product/category', category.id]">
       <img [src]="category.mainImage" [alt]="category.name">
     </a>
   </div>

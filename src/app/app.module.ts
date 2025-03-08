@@ -25,6 +25,7 @@ import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { AdminProductsComponent } from './features/admin/products/admin-products/admin-products.component';
+import { ProductDetailComponent } from './features/products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AdminProductsComponent } from './features/admin/products/admin-products
     RegisterComponent,
     AdminCategoryComponent,
     AdminDashboardComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

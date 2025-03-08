@@ -49,6 +49,17 @@ export class ProductService {
     );
   }
 
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
+      tap(response => console.log(`Producto obtenido: ${response.name}`)),
+      catchError(error => {
+        console.error('Error al obtener producto:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+  
+
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { responseType: 'text' as 'json' }).pipe(
       tap(() => console.log(`Producto con ID ${id} eliminado`)),

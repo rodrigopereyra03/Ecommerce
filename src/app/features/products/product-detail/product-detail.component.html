@@ -1,0 +1,79 @@
+<div class="custom-margin">
+  <div class="container mt-4 mb-5 shadow-sm" *ngIf="product">
+    <div class="row mb-4">
+      <div class="col text-center">
+        <h1>{{ product.name }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3 d-flex justify-content-center">
+          <img
+            [src]="selectedImage"
+            class="img-fluid"
+            [alt]="product.name"
+            style="max-height: 400px; object-fit: contain;"
+          />
+        </div>
+
+        <div class="d-flex overflow-auto bg-white p-2 rounded mb-4" style="gap: 10px;">
+          <img
+            *ngFor="let image of product.images; let i = index"
+            [src]="image"
+            [alt]="'Imagen ' + (i + 1)"
+            class="img-thumbnail rounded"
+            (click)="handleImageClick(image)"
+            style="cursor: pointer; max-height: 140px; width: 140px; object-fit: cover; transition: transform 0.2s;"
+            (mouseenter)="image.style.transform = 'scale(1.1)'"
+            (mouseleave)="image.style.transform = 'scale(1)'"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <pre class="card-text font">{{ product.description }}</pre>
+
+        <div class="my-4">
+          <p class="text-muted">
+            {{ product.quantity > 0 ? 'Stock disponible: ' + product.quantity : 'Producto agotado' }}
+          </p>
+          <h4 class="text-success">${{ product.price }}</h4>
+
+          <div class="mt-3">
+            <label for="quantity" class="form-label">Cantidad:</label>
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              [(ngModel)]="quantity"
+              min="1"
+              [max]="product.quantity"
+            />
+          </div>
+        </div>
+
+       <button class="btn btn-success btn-lg w-100">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <div *ngIf="showModal" class="modal show fade d-block" style="background-color: rgba(0, 0, 0, 0.5);">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Sumaste un producto al carrito</h5>
+            <button type="button" class="close" (click)="showModal = false">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Has agregado {{ quantity }} {{ quantity > 1 ? 'productos' : 'producto' }} de {{ product.name }} al carrito.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="goToCart()">Ir al carrito</button>
+            <button type="button" class="btn btn-secondary" (click)="goToHome()">Seguir comprando</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

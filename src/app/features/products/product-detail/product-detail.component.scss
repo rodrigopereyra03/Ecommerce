@@ -1,0 +1,37 @@
+.custom-margin{
+  margin-top: 150px;
+  margin-bottom: 115px;
+}
+
+.container {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Bordes redondeados */
+  background-color: #ffffff; /* Fondo claro */
+  padding: 20px; /* Espaciado interno */
+  border: 1px solid #cccccc6c;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  padding: 5px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+.btn{
+  background-color: #c7c7f5 ;
+  color: black;
+  border-color: #c7c7f5;
+  transition: background 0.5s;
+  font-weight: 500;
+}
+
+.btn:hover{
+  background-color: #ffffff;
+}
