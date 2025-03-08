@@ -13,14 +13,15 @@ export class AppComponent {
   isLoginPage = false;
   isRegisterPage = false
   isAdminPage = false;
-
+  isDetailProduct = false;
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isProductsPage = event.url.startsWith('/products'); // ✅ Detecta todas las variantes de /products/*
+        this.isProductsPage = event.url.startsWith('/product/category'); // ✅ Detecta todas las variantes de /products/*
         this.isLoginPage = event.url === '/login';
         this.isRegisterPage = event.url === '/register';
         this.isAdminPage = event.url.startsWith('/admin');
+        this.isDetailProduct = event.url.startsWith('/product');
       }
     });
   }
